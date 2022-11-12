@@ -1,4 +1,4 @@
---Astral
+--Asstral
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/exhil13/AstralB1.0/3kdIKfmsdSf/AstralLogoV1', true))()
 
@@ -247,11 +247,11 @@ end
 function astralmainui.NewButton(name,func,lib)
 	local TextButton = Instance.new("TextButton")
 	TextButton.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")[lib].ScrollingFrame
-	TextButton.BackgroundColor3 = Color3.fromRGB(112, 40, 185)
+	TextButton.BackgroundColor3 = Color3.fromRGB(38, 38, 38)
 	TextButton.Position = UDim2.new(0, 0, -0.103048779, 0)
 	TextButton.Size = UDim2.new(0, 200, 0, 50)
 	TextButton.Font = Enum.Font.SourceSans
-	TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+	TextButton.TextColor3 = Color3.fromRGB(118, 56, 190)
 	TextButton.TextScaled = true
 	TextButton.TextSize = 14.000
 	TextButton.TextWrapped = true
@@ -302,36 +302,36 @@ end
 
 function modules.Aura()
 	repeat
-		task.wait(0.12)
-		local nearest = getnearestplayer(Distance["Value"])
-		if nearest ~= nil and nearest.Team ~= lplr.Team and isalive(nearest) and nearest.Character:FindFirstChild("Humanoid").Health > 0.1 and isalive(lplr) and lplr.Character:FindFirstChild("Humanoid").Health > 0.1 and not nearest.Character:FindFirstChild("ForceField") then
-			local sword = getSword()
-			spawn(function()
-				local anim = Instance.new("Animation")
-				anim.AnimationId = "rbxassetid://4947108314"
-				local animator = lplr.Character:FindFirstChild("Humanoid"):FindFirstChild("Animator")
-				animator:LoadAnimation(anim):Play()
-				anim:Destroy()
-				bedwars["ViewmodelController"]:playAnimation(15)
-			end)
-			if sword ~= nil then
-				bedwars["SwordController"].lastAttack = game:GetService("Workspace"):GetServerTimeNow() - 0.11
-				HitRemote:SendToServer({
-					["weapon"] = sword.tool,
-					["entityInstance"] = nearest.Character,
-					["validate"] = {
-						["raycast"] = {
-							["cameraPosition"] = hashFunc(cam.CFrame.Position),
-							["cursorDirection"] = hashFunc(Ray.new(cam.CFrame.Position, nearest.Character:FindFirstChild("HumanoidRootPart").Position).Unit.Direction)
-						},
-						["targetPosition"] = hashFunc(nearest.Character:FindFirstChild("HumanoidRootPart").Position),
-						["selfPosition"] = hashFunc(lplr.Character:FindFirstChild("HumanoidRootPart").Position + ((lplr.Character:FindFirstChild("HumanoidRootPart").Position - nearest.Character:FindFirstChild("HumanoidRootPart").Position).magnitude > 14 and (CFrame.lookAt(lplr.Character:FindFirstChild("HumanoidRootPart").Position, nearest.Character:FindFirstChild("HumanoidRootPart").Position).LookVector * 4) or Vector3.new(0, 0, 0)))
-					},
-					["chargedAttack"] = {["chargeRatio"] = 0.8}
-				})
-			end
-		end
-	until not Enabled
+        task.wait(0.12)
+        local nearest = getnearestplayer(Distance["Value"])
+        if nearest ~= nil and nearest.Team ~= lplr.Team and isalive(nearest) and nearest.Character:FindFirstChild("Humanoid").Health > 0.1 and isalive(lplr) and lplr.Character:FindFirstChild("Humanoid").Health > 0.1 and not nearest.Character:FindFirstChild("ForceField") then
+            local sword = getSword()
+            spawn(function()
+                local anim = Instance.new("Animation")
+                anim.AnimationId = "rbxassetid://4947108314"
+                local animator = lplr.Character:FindFirstChild("Humanoid"):FindFirstChild("Animator")
+                animator:LoadAnimation(anim):Play()
+                anim:Destroy()
+                bedwars["ViewmodelController"]:playAnimation(15)
+            end)
+            if sword ~= nil then
+                bedwars["SwordController"].lastAttack = game:GetService("Workspace"):GetServerTimeNow() - 0.11
+                HitRemote:SendToServer({
+                    ["weapon"] = sword.tool,
+                    ["entityInstance"] = nearest.Character,
+                    ["validate"] = {
+                        ["raycast"] = {
+                            ["cameraPosition"] = hashFunc(cam.CFrame.Position),
+                            ["cursorDirection"] = hashFunc(Ray.new(cam.CFrame.Position, nearest.Character:FindFirstChild("HumanoidRootPart").Position).Unit.Direction)
+                        },
+                        ["targetPosition"] = hashFunc(nearest.Character:FindFirstChild("HumanoidRootPart").Position),
+                        ["selfPosition"] = hashFunc(lplr.Character:FindFirstChild("HumanoidRootPart").Position + ((lplr.Character:FindFirstChild("HumanoidRootPart").Position - nearest.Character:FindFirstChild("HumanoidRootPart").Position).magnitude > 14 and (CFrame.lookAt(lplr.Character:FindFirstChild("HumanoidRootPart").Position, nearest.Character:FindFirstChild("HumanoidRootPart").Position).LookVector * 4) or Vector3.new(0, 0, 0)))
+                    },
+                    ["chargedAttack"] = {["chargeRatio"] = 0.8}
+                })
+            end
+        end
+    until not Enabled
 end
 
 function modules.Velocity()
@@ -342,7 +342,7 @@ end
 
 
 function modules.CFrameSpeed()
-	Speed = 0.18
+	Speed = 0.24
 
 	_G.Speed = true
 
@@ -390,62 +390,62 @@ end
 
 local sprintEnabled = false
 function modules.sprint()
-	if sprintEnabled == false then
-		sprintEnabled = true
-	elseif sprintEnabled == true then
-		sprintEnabled = false
-	end
-	repeat
-		wait()
-		if not bedwars["SprintController"].sprinting then
-			bedwars["SprintController"]:startSprinting()
-		end
-	until sprintEnabled == false
+    if sprintEnabled == false then
+        sprintEnabled = true
+    elseif sprintEnabled == true then
+        sprintEnabled = false
+    end
+    repeat
+        wait()
+    if not bedwars["SprintController"].sprinting then
+        bedwars["SprintController"]:startSprinting()
+        end
+        until sprintEnabled == false
 end
 
 local Distance = {["Value"] = 30}
 function getbeds()
-	local beds = {}
-	for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
-		if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").Color ~= lplr.Team.TeamColor then
-			table.insert(beds,v)
-		end
-	end
-	return beds
+    local beds = {}
+    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+        if string.lower(v.Name) == "bed" and v:FindFirstChild("Covers") ~= nil and v:FindFirstChild("Covers").Color ~= lplr.Team.TeamColor then
+            table.insert(beds,v)
+        end
+    end
+    return beds
 end
 function isalive(plr)
-	plr = plr or lplr
-	if not plr.Character then return false end
-	if not plr.Character:FindFirstChild("Head") then return false end
-	if not plr.Character:FindFirstChild("Humanoid") then return false end
-	return true
+    plr = plr or lplr
+    if not plr.Character then return false end
+    if not plr.Character:FindFirstChild("Head") then return false end
+    if not plr.Character:FindFirstChild("Humanoid") then return false end
+    return true
 end
 function getserverpos(Position)
-	local x = math.round(Position.X/3)
-	local y = math.round(Position.Y/3)
-	local z = math.round(Position.Z/3)
-	return Vector3.new(x,y,z)
+    local x = math.round(Position.X/3)
+    local y = math.round(Position.Y/3)
+    local z = math.round(Position.Z/3)
+    return Vector3.new(x,y,z)
 end
 function modules.Nuker()
-	local Enabled = true
-	repeat
-		task.wait(0.1)
-		if isalive(lplr) and lplr.Character:FindFirstChild("Humanoid").Health > 0.1 then
-			local beds = getbeds()
-			for i,v in pairs(beds) do
-				local mag = (v.Position - lplr.Character:FindFirstChild("HumanoidRootPart").Position).Magnitude
-				if mag < Distance["Value"] then
-					game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer({
-						["blockRef"] = {
-							["blockPosition"] = getserverpos(v.Position)
-						},
-						["hitPosition"] = getserverpos(v.Position),
-						["hitNormal"] = getserverpos(v.Position)
-					})
-				end
-			end
-		end
-	until not Enabled
+    local Enabled = true
+    repeat
+        task.wait(0.1)
+        if isalive(lplr) and lplr.Character:FindFirstChild("Humanoid").Health > 0.1 then
+            local beds = getbeds()
+            for i,v in pairs(beds) do
+                local mag = (v.Position - lplr.Character:FindFirstChild("HumanoidRootPart").Position).Magnitude
+                if mag < Distance["Value"] then
+                    game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.DamageBlock:InvokeServer({
+                        ["blockRef"] = {
+                            ["blockPosition"] = getserverpos(v.Position)
+                        },
+                        ["hitPosition"] = getserverpos(v.Position),
+                        ["hitNormal"] = getserverpos(v.Position)
+                    })
+                end
+            end
+        end
+    until not Enabled
 end
 
 function modules.HighJump()
@@ -460,39 +460,39 @@ end
 
 function modules.DamageLessTPHighJump()
 	game.Workspace.Gravity = 1
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
-	wait()
-	game.Workspace.Gravity = 192.6
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 50, 0)
+wait()
+game.Workspace.Gravity = 192.6
 end
 
 function modules.LongJump()
@@ -507,7 +507,7 @@ function modules.ESP()
 	gui.Name = "names";
 	gui.AlwaysOnTop = true;
 	gui.LightInfluence = 0;
-	gui.Size = UDim2.new(1.75, 0, 1.75, 0);
+    gui.Size = UDim2.new(1.75, 0, 1.75, 0);
 	local frame = Instance.new("Frame", gui);
 	frame.BackgroundColor3 = Color3.fromRGB(170, 0, 0);
 	frame.Size = UDim2.new(1.7, 0, 3.89, 0);
@@ -528,30 +528,30 @@ end
 function modules.Chams()
 	local players = game.Players:GetPlayers()
 
-	for i,v in pairs(players) do
-		local esp = Instance.new("Highlight")
-		esp.Name = v.Name
-		esp.FillTransparency = 0.5
-		esp.FillColor = Color3.new(0.462745, 0, 0.462745)
-		esp.OutlineColor = Color3.new(0.462745, 0, 0.462745)
-		esp.OutlineTransparency = 0
-		esp.Parent = v.Character
-	end
-	game.Players.PlayerAdded:Connect(function(plr)
-		plr.CharacterAdded:Connect(function(chr)
+		for i,v in pairs(players) do
 			local esp = Instance.new("Highlight")
-			esp.Name = plr.Name
+			esp.Name = v.Name
 			esp.FillTransparency = 0.5
 			esp.FillColor = Color3.new(0.462745, 0, 0.462745)
 			esp.OutlineColor = Color3.new(0.462745, 0, 0.462745)
 			esp.OutlineTransparency = 0
-			esp.Parent = chr
-		end)
+			esp.Parent = v.Character
+		end
+		game.Players.PlayerAdded:Connect(function(plr)
+			plr.CharacterAdded:Connect(function(chr)
+				local esp = Instance.new("Highlight")
+				esp.Name = plr.Name
+				esp.FillTransparency = 0.5
+				esp.FillColor = Color3.new(0.462745, 0, 0.462745)
+				esp.OutlineColor = Color3.new(0.462745, 0, 0.462745)
+				esp.OutlineTransparency = 0
+				esp.Parent = chr
+			end)
 	end)
 end
 
 function modules.NoFall()
-	while true do
+    while true do
 		wait()
 		game:GetService("ReplicatedStorage").rbxts_include.node_modules:FindFirstChild("@rbxts").net.out._NetManaged.GroundHit:FireServer()
 	end
@@ -559,25 +559,25 @@ end
 
 
 function modules.AntiVoid()
-	local e = Instance.new("Part",workspace)
-	e.Size = Vector3.new(99999999,2,999999999999)
-	e.Position = Vector3.new(0,27,0)
-	e.Anchored = true
-	e.BrickColor = BrickColor.new("Royal purple")
-	e.Transparency = 0.5
+    local e = Instance.new("Part",workspace)
+		e.Size = Vector3.new(99999999,2,999999999999)
+		e.Position = Vector3.new(0,27,0)
+		e.Anchored = true
+		e.BrickColor = BrickColor.new("Royal purple")
+		e.Transparency = 0.5
 
 
-	local function PlayerTouched(Part)
-		local Parent = Part.Parent
-		if game.Players:GetPlayerFromCharacter(Parent) then
-			for i = 1,3 do wait()
-				Parent.HumanoidRootPart.CFrame = Parent.HumanoidRootPart.CFrame + Vector3.new(0,25,0)
+		local function PlayerTouched(Part)
+			local Parent = Part.Parent
+			if game.Players:GetPlayerFromCharacter(Parent) then
+				for i = 1,3 do wait()
+					Parent.HumanoidRootPart.CFrame = Parent.HumanoidRootPart.CFrame + Vector3.new(0,25,0)
+				end
+
 			end
-
 		end
-	end
 
-	e.Touched:connect(PlayerTouched)
+		e.Touched:connect(PlayerTouched)
 end
 
 --library stuff now XD
@@ -586,6 +586,7 @@ end
 astralmainui.CreateLib("Combat")
 astralmainui.NewButton("KillAura","Aura","Combat")
 astralmainui.NewButton("Velocity","Velocity","Combat")
+astralmainui.NewButton("Sprint","sprint","Combat")
 
 astralmainui.CreateLib("Movement")
 astralmainui.NewButton("Speed","CFrameSpeed","Movement")
