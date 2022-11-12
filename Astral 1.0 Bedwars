@@ -588,7 +588,7 @@ astralmainui.NewButton("Velocity","Velocity","Combat")
 
 astralmainui.CreateLib("Movement")
 astralmainui.NewButton("Speed","CFrameSpeed","Movement")
-astralmainui.NewButton("Fly1","CFrameSpeed","Movement")
+astralmainui.NewButton("Fly1","Fly1","Movement")
 astralmainui.NewButton("LongJump","LongJump","Movement")
 astralmainui.NewButton("HighJump","HighJump","Movement")
 astralmainui.NewButton("TpHighJump","DamageLessTPHighJump","Movement")
