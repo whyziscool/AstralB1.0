@@ -341,7 +341,7 @@ end
 
 
 function modules.CFrameSpeed()
-	Speed = 0.12 
+	Speed = 0.24
 
 	_G.Speed = true
 
@@ -600,3 +600,4 @@ astralmainui.NewButton("Chams","Chams","Visuals")
 astralmainui.CreateLib("Other")
 astralmainui.NewButton("NoFall","NoFall","Other")
 astralmainui.NewButton("AntiVoid","AntiVoid","Other")
+astralmainui.NewButton("Nuker","Nuker","Other")
