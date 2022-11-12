@@ -342,7 +342,7 @@ end
 
 
 function modules.CFrameSpeed()
-	Speed = 0.24
+	Speed = 0.17
 
 	_G.Speed = true
 
