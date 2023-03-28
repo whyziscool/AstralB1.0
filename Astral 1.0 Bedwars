@@ -1,6 +1,6 @@
 --Asstral
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/exhil13/AstralB1.0/3kdIKfmsdSf/AstralLogoV1', true))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/whyziscool/AstralB1.0/3kdIKfmsdSf/AstralLogoV1', true))()
 
 local lplr = game.Players.LocalPlayer
 local cam = game:GetService("Workspace").CurrentCamera
